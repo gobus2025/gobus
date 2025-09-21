@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking System API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .status {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status::before {
+            content: "✅";
+            font-size: 1.2rem;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .endpoints {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .endpoint-group {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .endpoint-group h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .endpoint {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #27ae60;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .endpoint.post { border-left-color: #e74c3c; }
+        .endpoint.put { border-left-color: #f39c12; }
+        .endpoint.delete { border-left-color: #e67e22; }
+
+        .method {
+            font-weight: bold;
+            color: #27ae60;
+            margin-right: 10px;
+        }
+
+        .method.post { color: #e74c3c; }
+        .method.put { color: #f39c12; }
+        .method.delete { color: #e67e22; }
+
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .info-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .endpoints {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚌 GoBus</h1>
+            <p>Production-Ready REST API Backend</p>
+        </div>
+
+        <div class="content">
+            <div class="status">
+                <strong>API Server is running successfully on port 5000</strong>
+            </div>
+
+            <div class="section">
+                <h2>📋 Available API Endpoints</h2>
+                
+                <div class="endpoints">
+                    <div class="endpoint-group">
+                        <h3>🔐 Authentication</h3>
+                        <div class="endpoint post">
+                            <span class="method post">POST</span>/api/auth/register
+                        </div>
+                        <div class="endpoint post">
+                            <span class="method post">POST</span>/api/auth/login
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/auth/me
+                        </div>
+                        <div class="endpoint put">
+                            <span class="method put">PUT</span>/api/auth/me
+                        </div>
+                        <div class="endpoint put">
+                            <span class="method put">PUT</span>/api/auth/change-password
+                        </div>
+                    </div>
+
+                    <div class="endpoint-group">
+                        <h3>🚌 Bus Management</h3>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/buses
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/buses/search
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/buses/:id
+                        </div>
+                        <div class="endpoint post">
+                            <span class="method post">POST</span>/api/buses (Admin)
+                        </div>
+                        <div class="endpoint put">
+                            <span class="method put">PUT</span>/api/buses/:id (Admin)
+                        </div>
+                        <div class="endpoint delete">
+                            <span class="method delete">DELETE</span>/api/buses/:id (Admin)
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/buses/stats (Admin)
+                        </div>
+                    </div>
+
+                    <div class="endpoint-group">
+                        <h3>🎫 Booking Management</h3>
+                        <div class="endpoint post">
+                            <span class="method post">POST</span>/api/bookings
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/bookings/user/:userId
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/bookings/:id
+                        </div>
+                        <div class="endpoint put">
+                            <span class="method put">PUT</span>/api/bookings/:id/confirm (Admin)
+                        </div>
+                        <div class="endpoint delete">
+                            <span class="method delete">DELETE</span>/api/bookings/:id
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/bookings (Admin)
+                        </div>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/bookings/stats (Admin)
+                        </div>
+                    </div>
+
+                    <div class="endpoint-group">
+                        <h3>🏥 Health Check</h3>
+                        <div class="endpoint">
+                            <span class="method">GET</span>/api/health
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🛠️ Technology Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Express.js</span>
+                    <span class="tech-item">MongoDB</span>
+                    <span class="tech-item">Mongoose</span>
+                    <span class="tech-item">JWT</span>
+                    <span class="tech-item">bcryptjs</span>
+                    <span class="tech-item">express-validator</span>
+                    <span class="tech-item">helmet</span>
+                    <span class="tech-item">CORS</span>
+                    <span class="tech-item">Rate Limiting</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🚀 How to Use GoBus API</h3>
+                <ul>
+                    <li>Use Postman, Insomnia, or similar tools to test endpoints</li>
+                    <li>Include JWT token in Authorization header: <code>Bearer &lt;token&gt;</code></li>
+                    <li>Register as admin to access admin-only endpoints</li>
+                    <li>MongoDB is connected to: <code>mongodb://127.0.0.1:27017/gobus</code></li>
+                    <li>All endpoints return JSON responses with proper HTTP status codes</li>
+                    <li>Input validation and comprehensive error handling included</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>🔧 Testing the API</h3>
+                <ul>
+                    <li>Run <code>node test-api.js</code> to execute automated tests</li>
+                    <li>Check server logs for detailed request/response information</li>
+                    <li>Use the health endpoint to verify API status</li>
+                    <li>Create a frontend application to consume this API</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>GoBus API v1.0.0 | Production Ready | Secure & Scalable</p>
+        </div>
+    </div>
+</body>
+</html>
